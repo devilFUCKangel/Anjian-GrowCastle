@@ -1,0 +1,18 @@
+{
+   "BestResolution" : {
+      "X" : 0,
+      "Y" : 0
+   },
+   "ChangeFileList" : 0,
+   "Description" : "",
+   "FileVersion" : {
+      ".atc" : 0,
+      ".mq" : 0,
+      ".prop" : 0,
+      ".rtd" : 0,
+      ".uip" : 0,
+      ".uis" : 0
+   },
+   "Name" : "GrowCastle",
+   "id" : "7e82bb40-3225-43ec-89c0-134fc4a1f6da"
+}

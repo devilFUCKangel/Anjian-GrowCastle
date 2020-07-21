@@ -1,0 +1,3 @@
+I haven't test yet, if the folder "/sdcard/MobileAnjian/GCPicTemp/" no created, will AnJian create for it?
+
+No, folder have to create first or not pic will not create

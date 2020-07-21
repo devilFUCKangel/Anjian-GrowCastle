@@ -1,0 +1,342 @@
+//1.Main
+//1.1Ads
+//1.260Gem
+//1.3Battle
+//1.3.1MarcoCheck
+//1.3.1.1DiamondTrack
+//1.3.1.1.1AllWoodTrack
+//1.3.1.1.1.1Calculation	
+//1.3.1.2MarcoFail
+//1.3.3Battling
+//1.3.3.1BattlingTimeOutMacroGreenMoster
+
+Dim battleX,battleY,adsX,adsY,gem60X,gem60Y,giftX,giftY,diamondX,diamondY,marcoFail,snapNum,intX,intY,traceRepeat,topLeftX,topLeftY,topRightX,topRightY,btmLeftX,btmLeftY,btmRightX,btmRightY,woodChain1X1,woodChain1Y1,woodChain1X2,woodChain1Y2,woodChain2X1,woodChain2Y1,woodChain2X2,woodChain2Y2,woodChain1Mirror,woodChain2Mirror,mirrorWood,checkWoodChanging,captureTime,diamondWoodX,diamondWoodY,woodX,woodY,diamondWoodColor,woodX2,woodY2,woodX3,woodY3, woodChangeNum,snapDicArray(3) = {"/sdcard/MobileAnJian/GCPicTemp/snapPic", woodChangeNum ,".png"},snapDic
+//getApp = Sys.GetFront()
+//TracePrint getApp
+traceRepeat = 0
+For 35
+    traceRepeat = traceRepeat + 1
+    TracePrint traceRepeat
+    marcoFail = 0
+    FindPic 1088,636,1272,714,"Attachment:battle.png","000000",0,0.9,battleX,battleY
+    If battleX > -1 And battleY > -1 Then 
+        FindPic 321,456,890,700,"Attachment:adsget.png","000000",2,0.9,adsX,adsY
+        If adsX > -1 And adsY > -1 Then
+            Tap adsX, adsY
+            Delay 40000
+            KeyPress "Back"
+            Delay 2000
+            FindPic 1088,636,1272,714 ,"Attachment:battle.png","000000",2,0.9,battleX,battleY
+            If battleX < 0 And battleY < 0 Then
+                KeyPress "Back"
+                Delay 10000
+                FindPic 1088,636,1272,714 ,"Attachment:battle.png","000000",2,0.9,battleX,battleY
+                If battleX < 0 And battleY < 0 Then 
+                    Tap 1251, 31
+                    FindPic 1088,636,1272,714 ,"Attachment:battle.png","000000",2,0.9,battleX,battleY
+                    If battleX < 0 And battleY < 0 Then 
+                        KillApp "com.raongames.growcastle"
+                        Delay 2000
+                        Sys.ClearMemory()
+                        RunApp "com.raongames.growcastle"
+                        Delay 20000
+                    End If
+                End If
+            End If
+        End If
+        TracePrint "afterads"
+        FindPic 243,0,416,64,"Attachment:gem60max.png","000000",0,0.9,gem60X,gem60Y
+        If gem60X > -1 And gem60Y > -1 Then 
+            Tap 380,456
+            Delay 2000
+            Tap 380,377
+            Delay 2000
+            Tap 897,365
+            Delay 2000
+            For 10
+                Tap 885, 480
+                Delay 1000
+            Next
+            For 2
+                Tap 855,627
+                Delay 1000
+            Next
+            For 3
+                KeyPress "Back"
+                Delay 1000
+            Next
+        End If
+        TracePrint "aftergem"
+        Tap battleX, battleY
+        Delay 1000
+        TracePrint "battletap"
+        FindPic 472, 567, 718, 693, "Attachment:giftstart.png", "000000", 1, 0.9, giftX, giftY
+        If giftX > -1 And giftY > -1 Then 
+            Do
+                Tap giftX, giftY
+                marcoFail = marcoFail + 1
+                woodChangeNum = 0
+                checkWoodChanging = 0
+                captureTime = 0
+                For 75
+                    FindPic 222, 434, 968, 567, "Attachment:diamond.png", "000000", 1, 0.9, diamondX, diamondY
+                    If diamondX > -1 And diamondY > -1 Then 
+                        diamondWoodX = diamondX
+                        diamondWoodY = diamondY
+                        SnapShot "/sdcard/MobileAnJian/GCPicTemp/snapPic.png"
+                        TracePrint diamondWoodX,diamondWoodY
+                        For 75 
+                            FindPic diamondWoodX - 31, diamondWoodY - 55, diamondWoodX + 48, diamondWoodY + 53, "Attachment:wood4.png", "000000", 1, 0.9, woodX, woodY
+                            If woodX > -1 And woodY > -1 Then 
+                                For 75
+                                    diamondWoodX = woodX
+                                    diamondWoodY = woodY
+                                    FindPic diamondWoodX - 31, diamondWoodY - 55, diamondWoodX + 48, diamondWoodY + 53, "Attachment:wood4.png", "000000", 1, 0.9, woodX, woodY                                
+                                    If woodX = diamondWoodX And woodY = diamondWoodY Then 
+                                        diamondWoodColor = GetPixelColor(woodX,woodY,0)
+                                        TracePrint diamondWoodColor
+                                        //7FA5BD //8EBFD3
+                                        For 75
+                                            FindColor diamondWoodX-1,diamondWoodY-1,diamondWoodX+1,diamondWoodY+1, diamondWoodColor, 1, 1.00, woodX, woodY
+                                            If woodX < 0 And woodY < 0 Then 
+                                                Delay 250
+                                                woodChangeNum = woodChangeNum + 1
+                                                snapDicArray(1) = woodChangeNum
+                                                snapDic = Join(snapDicArray,"")
+                                                SnapShot snapDic
+                                                TracePrint woodX,woodY
+                                                For 75
+                                                    FindColor diamondWoodX - 1, diamondWoodY - 1, diamondWoodX + 1, diamondWoodY + 1, diamondWoodColor, 1, 1.00, woodX, woodY
+                                                    If woodX > -1 And woodY > -1 Then 
+                                                        TracePrint captureTime
+                                                        For captureTime
+                                                            FindColor diamondWoodX - 1, diamondWoodY - 1, diamondWoodX + 1, diamondWoodY + 1, diamondWoodColor, 1, 1.00, woodX, woodY                                                           
+                                                        Next
+                                                        For 75
+                                                            FindColor diamondWoodX - 1, diamondWoodY - 1, diamondWoodX + 1, diamondWoodY + 1, diamondWoodColor, 1, 1.00, woodX, woodY
+                                                            If woodX < 0 And woodY < 0 Then 
+                                                                Delay 250
+                                                                woodChangeNum = woodChangeNum + 1
+                                                                snapDicArray(1) = woodChangeNum
+                                                                snapDic = Join(snapDicArray,"")
+                                                                SnapShot snapDic
+                                                                TracePrint woodX,woodY
+                                                            End If
+                                                        Next
+
+                                                        Exit For
+                                                    Else
+                                                        captureTime = captureTime + 1
+                                                    End If
+                                                Next
+                                                Exit For
+                                            End If
+                                        Next
+                                        Exit For
+                                    End If
+                                Next
+                                Exit For
+                            End If
+                        Next
+                        Exit For
+                    End If
+                Next
+                Delay 1000
+                FindPic diamondWoodX - 31, diamondWoodY - 55, diamondWoodX + 48, diamondWoodY + 53, "Attachment:wood4.png", "000000", 1, 0.97, diamondWoodX, diamondWoodY
+                Delay 1000
+                RunApp "com.estrongs.android.pop"
+                //image
+                Delay 5000
+                Tap 942,486
+                //last create
+                Delay 2000
+                Tap 883,163
+                //select first pic
+                Delay 2000
+                Tap 470, 222
+                //calculation
+                Delay 5000
+	
+                //first pic
+                FindPic diamondX - 31, diamondY - 55, diamondX + 48, diamondY + 53, "Attachment:diamond.png", "000000", 1, 0.8, diamondX, diamondY
+                If diamondX > -1 And diamondY > -1 Then                     
+                    Delay 1000
+                    While (woodChangeNum > 0)
+                        TracePrint diamondX,diamondWoodX,woodChangeNum
+                        woodChangeNum = woodChangeNum - 1
+                        checkWoodChanging = checkWoodChanging +1
+                        //swipe sec pic
+                        Delay 1000
+                        Swipe 820, 360, 460, 360
+                        Delay 1000
+                        FindPic diamondWoodX - 3, diamondWoodY - 3, diamondWoodX + 37, diamondWoodY + 19, "Attachment:wood4.png", "000000", 1, 0.97, woodX, woodY
+                        If woodX < 0 And woodY < 0 Then                           
+                            //track all wood
+                            FindPic 270, 240, 930, 467, "Attachment:wood4.png", "000000", 0, 0.97, topLeftX, topLeftY
+                            FindPic 270, 500, 930, 680, "Attachment:wood4.png", "000000", 2, 0.97, btmRightX, btmRightY
+                            FindPic 270, 500, 930, 680, "Attachment:wood4.png", "000000", 0, 0.97, btmLeftX, btmLeftY
+                            FindPic 270, 240, 930, 467, "Attachment:wood4.png", "000000", 2, 0.97, topRightX, topRightY
+                            //test chain style
+                            For 2
+                                woodChain1X1 = topLeftX
+                                woodChain1X2 = btmLeftX
+                                woodChain1Y1 = topLeftY
+                                woodChain1Y2 = btmLeftY
+                                woodChain2X1 = topRightX
+                                woodChain2X2 = btmRightX
+                                woodChain2Y1 = topRightY
+                                woodChain2Y2 = btmRightY
+                                woodChain1Mirror = (woodChain1X1 + woodChain1X2) / 2
+                                woodChain2Mirror = (woodChain2X1 + woodChain2X2) / 2
+                                If Abs(woodChain1Y1 + woodChain1Y2) - (woodChain2Y1 + woodChain2Y2) < 5 Then //must correct centre on Y
+                                    If Abs(woodChain1Y1 - woodChain2Y1) < 5 And Abs(woodChain1Y2 - woodChain2Y2) < 5 And Abs(woodChain1Mirror - woodChain2Mirror) > 5 Then //2 wood same high, different mirror on X
+                                        //3 type rotation, anticlockwise rotation, nearby, jump 1,jump 2 (nearby and jump 2 are similar, hard)
+                                        If (woodChain1Mirror < 440 - 75 And woodChain2Mirror > 740 - 75) Or (Abs(woodChain1Mirror - woodChain2Mirror) > 297 And Abs(woodChain1Mirror - woodChain2Mirror) < 303) Then //nearby on side or nearby
+                                            //create woodmirror
+                                            Exit For
+                                        ElseIf Abs(woodChain1Mirror - woodChain2Mirror) > 147 / 2 And Abs(woodChain1Mirror - woodChain2Mirror) < 153 / 2 Then // 150 jump 1 or 2										
+                                            FindPic 580,478,620,500,"Attachment:wood4.png","000000",1,0.97,intX,intY
+                                            If intX < 0 And intY < 0 Then //jump 1
+                                                //create woodmirror
+                                                Exit For
+                                            Else //jump 2
+                                                //create woodmirror
+                                                Exit For
+                                            End If
+                                        Else //clockwise rotation, wood definitely correct
+                                            //create wodmirror
+                                            Exit For
+                                        End If
+                                    Else //if not same Y, wood definitely correct
+                                        //create woodmirror
+                                        Exit For
+                                    End If
+                                    //change wood of Chain to test
+                                    woodChain2X2 = btmLeftX
+                                    woodChain2Y2 = btmLeftY
+                                    woodChain1X2 = btmRightX
+                                    woodChain1Y2 = btmRightY
+                                End If
+                            Next	
+                            For 2
+                                If woodChain1Mirror > diamondWoodX Then
+                                    mirrorWood = diamondWoodX + Abs((woodChain1Mirror - diamondWoodX) * 2)
+                                ElseIf woodChain1Mirror < diamondWoodX Then
+                                    mirrorWood = diamondWoodX - Abs((woodChain1Mirror - diamondWoodX) * 2)
+                                End If
+                                If mirrorWood > 220 And mirrorWood < 980 Then	
+                                    FindPic mirrorWood - 3, 481 - 3, mirrorWood + 37, 481 + 19, "Attachment:wood4.png", "000000", 1, 0.97, intX, intY
+                                    If intX < 0 And intY < 0 Then 
+                                        RunApp "com.raongames.growcastle"
+                                        Delay 1000
+                                        FindPic mirrorWood - 3, 481 - 3, mirrorWood + 48, 481 + 19, "Attachment:wood4.png", "000000", 1, 0.97, intX, intY
+                                        If intX > -1 And intY > -1 Then 
+                                            diamondWoodX = mirrorWood
+                                            RunApp "com.estrongs.android.pop"
+                                            Delay 1000
+                                            Exit For
+                                        End If
+                                        RunApp "com.estrongs.android.pop"
+                                        Delay 1000
+                                    End If
+                                End If
+                                woodChain1Mirror = woodChain2Mirror
+                            Next
+                        End If   
+                    Wend
+                End If
+                //exit
+                Delay 500
+                KeyPress "Back"
+                Delay 500
+                KeyPress "Back"
+                Delay 500
+                KeyPress "Back"
+                Delay 500
+                KeyPress "Back"
+                Delay 500
+                KeyPress "Back"
+                Delay 3000
+                Tap diamondWoodX, diamondWoodY
+                TracePrint diamondWoodX,diamondWoodY
+                Delay 1000          
+                FindPic 472,567,718,693, "Attachment:giftstart.png","000000", 1,0.9, intX, intY
+                If intX > -1 And intY > -1 Then 
+                    Delay 30000
+                ElseIf marcoFail = 2
+                    KeyPress "Back"
+                    Delay 2000
+                    Tap 495, 618
+                    Delay 10000
+                    RunApp "com.raongames.growcastle"
+                    Exit Do
+                Else 
+                    Exit Do
+                End If
+            Loop While (marcoFail < 3)
+        End If
+        TracePrint "aftermacrocheck"
+        FindPic 861,200,938,274,"Attachment:waveskip.png","000000",1,0.9,intX,intY
+        If intX > -1 And intY > -1 Then 
+            KeyPress "Back"
+            Delay 1000
+            For 20
+                FindPic 30,677,91,716,"Attachment:X1.png","000000",0,0.9,intX,intY
+                If intX > -1 And intY > -1 Then 
+                    Delay 1000
+                    Tap 56, 668
+                    Do
+                        FindPic 30,677,91,716,"Attachment:X1.png","000000",0,0.9,intX,intY
+                        If intX > -1 And intY > -1 Then
+                            Delay 1000
+                            Tap 56, 668
+                        Else 
+                            Exit Do
+                        End If
+                    Loop
+                    Exit For
+                End If
+            Next
+            For 4
+                FindPic 1088,636,1272,714 ,"Attachment:battle.png","000000",0,0.9,intX,intY
+                If intX < 0 And intY < 0 Then 
+                    Tap 379,86
+                    Delay 250
+                    Tap 299,180
+                    Delay 250
+                    Tap 375,178
+                    Delay 250
+                    Tap 457,179
+                    Delay 11000
+                End If
+            Next
+            
+            For 10
+                Delay 4000
+                FindPic 1088,636,1272,714 ,"Attachment:battle.png","000000",1,0.9,intX,intY
+                If intX > 0 And intY > 0 Then
+                    Exit For
+                End If
+            Next
+            Delay 2000
+            FindPic 1088,636,1272,714 ,"Attachment:battle.png","000000",1,0.9,intX,intY
+            If intX < 0 And intY < 0 Then
+                KeyPress "Back"
+                Delay 1000
+                Tap 786,619
+                EndScript
+            End If
+    
+            TracePrint "afterbattle"
+        End If
+    End If
+Next
+KeyPress "Back"
+Delay 1000
+Tap 490, 624
+Delay 2000
+KillApp "com.raongames.growcastle"
+Sys.ClearMemory 
+Delay 1000
+RunApp "com.raongames.growcastle"
+Delay 20000

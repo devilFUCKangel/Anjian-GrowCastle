@@ -1,0 +1,553 @@
+Dim rotation,intX,intY,intX1,intY1,intX2,intY2,intX3,intY3,intX4,intY4,intX5,intY5,intX6,intY6,intX7,intY7,intX8,intY8,intX9,intY9
+rotation=GetScreenRotation()
+If rotation = 0 Then 
+    FindPic 1088,636,1272,714,"Attachment:battle.png","000000",0,0.9,intX,intY
+    If intX > -1 And intY > -1 Then
+        Tap intX, intY
+    End If
+    Delay 1000
+    FindPic 472, 567, 718, 693, "Attachment:giftstart.png", "000000", 1, 0.9, intX, intY
+    If intX > -1 And intY > -1 Then 
+        EnableFastCapture (True)
+        For 5
+            Tap intX, intY
+            For 75
+                FindPic 222, 434, 968, 567, "Attachment:diamond.png", "000000", 1, 0.9, intX1, intY1
+                If intX1 > -1 And intY1 > -1 Then 
+                    Exit For
+                End If
+            Next
+            intX9 = intX1
+            intY9 = intY1
+            For 2
+            	For 75
+                	FindPic intX9-31,intY9-55,intX9+48,intY9+53,"Attachment:wood4.png","000000",1,1,intX2,intY2
+                	If intX2 > -1 And intY2 > -1 Then 
+                    	Exit For
+                	End If
+            	Next
+            	For 75
+                	FindPic intX2-31,intY2-55,intX2+48,intY2+53,"Attachment:wood4.png","000000",1,0.97, intX3, intY3 
+                	If intX3 < 0 And intY3 < 0 Then 
+                    	For 20
+                        	KeepCapture 
+                        	FindPic 270, 240, 930, 467, "Attachment:wood4.png", "000000", 0, 0.97, intX3, intY3
+                        	FindPic 270, 490, 930, 680, "Attachment:wood4.png", "000000", 2, 0.97, intX4, intY4
+                        	FindPic 270, 490, 930, 680, "Attachment:wood4.png", "000000", 0, 0.97, intX5, intY5
+                        	FindPic 270, 240, 930, 467, "Attachment:wood4.png", "000000", 2, 0.97, intX6, intY6
+                        	If (intX3 > -1 And intX4 > -1) or (intX5 > -1 And intX6 > -1) Then 
+                            	Exit For
+                        	End If	
+                        	ReleaseCapture
+                    	Next
+                    	If intX3 > -1 And intY3 > -1 Then
+                        	FindPic intX3 - 31, intY3 - 55, intX3 + 48, intY3 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX3, intY3
+                    	End If
+                    	If intX4 > -1 And intY4 > -1 Then
+                        	FindPic intX4 - 31, intY4 - 55, intX4 + 48, intY4 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX4, intY4
+                    	End If
+                    	If intX5 > -1 And intY5 > -1 Then
+                        	FindPic intX5 - 31, intY5 - 55, intX5 + 48, intY5 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX5, intY5
+                    	End If
+                    	If intX6 > -1 And intY6 > -1 Then
+                        	FindPic intX6 - 31, intY6 - 55, intX6 + 48, intY6 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX6, intY6
+                    	End If
+                    	If ((intY3 - intY6) < 10 And (intY3 - intY6) > -10) And ((intY4 - intY5) < 10 And (intY4 - intY5) > -10) Then //if changing distant = wood distand, object definitely jump 1
+                        	If ((intX6 - intX3) < 85 And (intX6 - intX3) > 65) And ((intX4 - intX5) < 85 And (intX4 - intX5) > 65) Then 
+                            	If intX2 - 31 -300 > 220 And intX2 + 48 - 300 < 980 Then 
+                                	FindPic intX2 - 31 -300, 486 - 55, intX2 + 48 - 300, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX7, intY7
+                                	If intX7 < 0 And intY7 < 0 Then 
+                                    	intX9 = intX2 - 31 - 300
+                                    	intX2 = intX9
+                                    	ReleaseCapture
+                                    	Exit For
+                                	End If
+                            	End If
+                            	If intX2 - 31 + 300 > 220 And intX2 + 48 + 300 < 980 Then
+                                	FindPic intX2 - 31 + 300, 486 - 55, intX2 + 48 + 300, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX7, intY7
+                                	If intX7 < 0 And intY7 < 0 Then 
+                                    	intX9 = intX2 - 31 + 300
+                                    	intX2 = intX9
+                                    	ReleaseCapture
+                                    	Exit For
+                                	End If
+                            	End If
+                        	ElseIf ((intX6 - intX3) - (intX4 - intX5) > -10 And (intX6 - intX3) - (intX4 - intX5) < 10) Then
+                            	If intX2 - 31 -150 > 220 And intX2 + 48 - 150 < 980 Then
+                                	FindPic intX2 - 31 -150, 486 - 55, intX2 + 48 - 150, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX7, intY7
+                                	If intX7 < 0 And intY7 < 0 Then 
+                                    	intX9 = intX2 - 31 - 300
+                                    	intX2 = intX9
+                                    	ReleaseCapture
+                                    	Exit For
+                                	End If
+                            	End If
+                            	If intX2 - 31 + 150 > 220 And intX2 + 48 + 150 < 980 Then
+                                	FindPic intX2 - 31 + 150, 486 - 55, intX2 + 48 + 150, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX7, intY7
+                                	If intX7 < 0 And intY7 < 0 Then 
+                                    	intX9 = intX2 - 31 + 300
+                                    	intX2 = intX9
+                                    	ReleaseCapture
+                                    	Exit For
+                                	End If
+                            	End If
+                        	ElseIf ((intX6 - intX3) - (intX4 - intX5) <= -10 Or (intX6 - intX3) - (intX4 - intX5) >= 10) Then
+                            	intX7 = intX4
+                            	intY7 = intY4
+                            	intX4 = intX5
+                            	intY4 = intY5
+                            	intX5 = intX7
+                            	intY5 = intY7
+                        	End If
+                        End If
+                    	For 2
+                        	If ((intY3 + intY4) / 2) - 10 < ((intY5 + intY6 ) / 2 ) + 10 And ((intY3 + intY4) / 2) + 10 > ((intY5 + intY6 ) / 2 )  -  10 Then
+                           		intX7 = ( intX3 + intX4 ) / 2
+                           		If intX7 > intX2 Then
+                               		intX7 = intX7 - intX2
+                               		intX7 = intX2 + intX7 + intX7
+                           		ElseIf intX7 < intX2 Then
+                               		intX7 = intX2 - intX7
+                               		intX7 = intX2 - intX7 - intX7
+                           		End If
+                           		If intX7 > 220 And intX7 < 980 Then	
+                               		FindPic intX7 - 31, 486 - 55, intX7 + 48, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX8, intY8
+                               		If intX8 < 0 And intY8 < 0 Then 
+                               			intX9 = intX7
+                                   		Exit For
+                               		End If
+                           		End If
+                       		ElseIf (( intY3 + intY5 ) / 2) -  10 < (( intY4 + intY6 ) / 2 ) + 10 And ((intY3 + intY5) / 2) + 10 > ((intY4 + intY6 ) / 2 )  - 10 Then
+                           		intX7 = ( intX3 + intX5 ) / 2
+                           		If intX7 > intX2 Then 
+                               		intX7 = intX7 - intX2
+                               		intX7 = intX2 + intX7 + intX7
+                           		ElseIf intX7 < intX2 Then
+                               		intX7 = intX2 - intX7
+                               		intX7 = intX2 - intX7 - intX7
+                           		End If
+                           		If intX7 > 220 And intX7 < 980 Then
+                               		FindPic intX7 - 31, 486 - 55, intX7 + 48, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX8, intY8
+                               		If intX8 < 0 And intY8 < 0 Then
+                                   		intX9 = intX7
+                                   		Exit For
+                               		End If
+                           		End If
+                       		End If
+                       		If intX9 <> intX7 Then
+                       			intX7 = intX3
+                       			intY7 = intY3
+                       			intX3 = intX6
+                       			intY3 = intY6
+                       			intX6 = intX7
+                       			intY6 = intY7
+                       		End If
+                   		Next
+                    	ReleaseCapture 
+						intX2 = intX9
+                    	Exit For
+                	End If
+                	intX2 = intX3
+                	intY2 = intY3
+            	Next
+            	TracePrint intX2
+            Next
+            Delay 2000
+            Tap intX2, 486
+         	FindPic intX8 - 31, 486 - 55, intX8 + 48, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX7, intY7
+                If intX7 > 0 And intY7 > 0 Then
+                  	Tap intX7,intY7
+               	End If
+            Delay 1000
+            Tap intX1, 486
+            Delay 10000
+            FindPic 472,567,718,693, "Attachment:giftstart.png","000000", 1,0.9, intX, intY
+            If intX > -1 And intY > -1 Then 
+                Delay 50000
+            ElseIf intX < 0 And intY < 0 Then
+            	Exit For
+            End If
+        Next
+        EnableFastCapture (False)
+        Delay 2000
+        FindPic 472,567,718,693, "Attachment:giftstart.png","000000", 1,0.9, intX, intY
+        If intX > -1 And intY > -1 Then 
+            intY9 = Sys.GetFront()
+            TracePrint intY9
+            KeyPress "Back"
+            Delay 1000
+			Tap 490, 625
+			Delay 2000
+			RunApp intY9
+			Delay 20000
+			Tap 262, 660
+			Delay 1000
+			Tap 442, 429
+			Delay 1000
+			Tap 353, 342
+			Delay 1000
+			Tap 922, 465
+			Delay 3000
+			Tap 864, 362
+			Delay 2000
+			RunApp intY9
+			Delay 20000
+        End If
+    End If
+    FindPic 861,200,938,274,"Attachment:waveskip.png","000000",1,0.9,intX,intY
+    If intX > -1 And intY > -1 Then 
+        KeyPress "Back"
+        For 4
+            FindPic 1088,636,1272,714 ,"Attachment:battle.png","000000",0,0.9,intX,intY
+            If intX < 0 And intY < 0 Then 
+                Tap 379,86
+                Delay 250
+                Tap 299,180
+                Delay 250
+                Tap 375,178
+                Delay 250
+                Tap 457,179
+                Delay 11000
+            End If
+        Next
+       	FindPic 0,0,0,0,"Attachment:X1.png","000000",0,0.9,intX,intY
+		If intX > -1 And intY > -1 Then 
+			Delay 1000
+			Tap 56,668
+		End If
+        For 10
+            Delay 4000
+            FindPic 1088,636,1272,714 ,"Attachment:battle.png","000000",1,0.9,intX,intY
+            If intX > 0 And intY > 0 Then
+                Exit For
+            End If
+        Next
+        Delay 2000
+        FindPic 1088,636,1272,714 ,"Attachment:battle.png","000000",1,0.9,intX,intY
+        If intX < 0 And intY < 0 Then
+            KeyPress "Back"
+            Delay 1000
+            Tap 786,619
+            Delay 1080000
+        End If
+    End If
+  //For 4
+     // FindPic 152,211,251,379,"Attachment:beer.png","000000",1,0.9,intX,intY
+     // If intX > -1 And intY > -1 Then 
+          //Tap intX + 204, intY - 141
+          //Delay 250
+          //Tap intX + 123, intY - 45
+          //Delay 250
+          //Tap intX + 205, intY - 48
+          //Delay 250
+          //Tap intX + 284, intY - 47
+          //Delay 11000
+      //End If
+  //Next
+    FindPic 321,456,890,700,"Attachment:adsget.png","000000",2,0.9,intX,intY
+    If intX > -1 And intY > -1 Then
+        Tap intX, intY
+        Delay 40000
+        Do
+            KeyPress "Back"
+            Delay 2000
+            FindPic 1088,636,1272,714 ,"Attachment:battle.png","000000",2,0.9,intX,intY
+            If intX < 0 And intY < 0 Then
+                Tap 950, 467
+                Delay 10000
+            End If
+        Loop While intX < 0 And intY < 0
+    End If
+    FindPic 243,0,416,64,"Attachment:gem60max.png","000000",0,0.9,intX,intY
+    If intX > -1 And intY > -1 Then 
+        Tap 380,456
+        Delay 2000
+        Tap 380,377
+        Delay 2000
+        Tap 897,365
+        Delay 2000
+        For 10
+            Tap 885, 480
+            Delay 1000
+        Next
+        For 2
+            Tap 855,627
+            Delay 1000
+        Next
+        For 3
+            KeyPress "Back"
+            Delay 1000
+        Next
+    End If
+ElseIf rotation = 1 Then
+    FindPic 6,1087,99,1271,"Attachment:battle90R.png","000000",0,0.9,intX,intY
+    If intX > -1 And intY > -1 Then
+        Tap intX, intY
+    End If
+    Delay 1000
+    FindPic 25, 246, 222, 784, "Attachment:giftstart90.png", "000000", 1, 0.9, intX, intY
+    If intX > -1 And intY > -1 Then 
+        rotation = EnableFastCapture(True)
+        Do
+            Tap intX, intY
+            For 75
+                FindPic 222, 434, 968, 567, "Attachment:diamond.png", "000000", 1, 0.9, intX1, intY1
+                If intX1 > -1 And intY1 > -1 Then 
+                    Exit For
+                End If
+            Next 
+            For 75
+                FindPic intX1-31,intY1-55,intX1+48,intY1+53,"Attachment:wood4.png","000000",1,1,intX2,intY2
+                If intX2 > -1 And intY2 > -1 Then 
+                    Exit For
+                End If
+            Next
+            For 30
+                TracePrint intX2
+                TracePrint intY2
+                FindPic intX2-31,intY2-55,intX2+48,intY2+53,"Attachment:wood4.png","000000",1,0.97, intX3, intY3 
+                TracePrint intX3
+                TracePrint intY3
+                If intX3 < 0 And intY3 < 0 Then 
+                    For 20
+                        KeepCapture 
+                        FindPic 270, 240, 930, 467, "Attachment:wood4.png", "000000", 0, 0.97, intX3, intY3
+                        FindPic 270, 490, 930, 680, "Attachment:wood4.png", "000000", 2, 0.97, intX4, intY4
+                        FindPic 270, 490, 930, 680, "Attachment:wood4.png", "000000", 0, 0.97, intX5, intY5
+                        FindPic 270, 240, 930, 467, "Attachment:wood4.png", "000000", 2, 0.97, intX6, intY6
+                        TracePrint intX3
+                        TracePrint intX4
+                        TracePrint intX5
+                        TracePrint intX6
+                        TracePrint intY3
+                        TracePrint intY4
+                        TracePrint intY5
+                        TracePrint intY6
+                        If (intX3 > -1 And intX4 > -1) or (intX5 > -1 And intX6 > -1) Then 
+                            Exit For
+                        End If	
+                        ReleaseCapture
+                    Next
+                    If intX3 > -1 And intY3 > -1 Then
+                        FindPic intX3 - 31, intY3 - 55, intX3 + 48, intY3 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX3, intY3
+                    End If
+                    If intX4 > -1 And intY4 > -1 Then
+                        FindPic intX4 - 31, intY4 - 55, intX4 + 48, intY4 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX4, intY4
+                    End If
+                    If intX5 > -1 And intY5 > -1 Then
+                        FindPic intX5 - 31, intY5 - 55, intX5 + 48, intY5 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX5, intY5
+                    End If
+                    If intX6 > -1 And intY6 > -1 Then
+                        FindPic intX6 - 31, intY6 - 55, intX6 + 48, intY6 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX6, intY6
+                    End If
+                    TracePrint intX3
+                    TracePrint intX4
+                    TracePrint intX5
+                    TracePrint intX6
+                    TracePrint intY3
+                    TracePrint intY4
+                    TracePrint intY5
+                    TracePrint intY6
+                    If ((intY3 - intY6) < 10 And (intY3 - intY6) > -10) And ((intY4 - intY5) < 10 And (intY4 - intY5) > -10) Then //if changing distant = wood distand, object definitely jump 1
+                        If ((intX6 - intX3) < 160 And (intX6 - intX3) > 140) And ((intX4 - intX5) < 160 And (intX4 - intX5) > 140) Then 
+                            If intX2 - 31 -300 > 220 And intX2 + 48 - 300 < 980 Then 
+                                FindPic intX2 - 31 -300, 486 - 55, intX2 + 48 - 300, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX7, intY7
+                                If intX7 < 0 And intY7 < 0 Then 
+                                    Delay 2000
+                                    TracePrint intX2 - 31 -300
+                                    Tap intX2 - 31 - 300, 486
+                                End If
+                            End If
+                            If intX2 - 31 + 300 > 220 And intX2 + 48 + 300 < 980 Then
+                                FindPic intX2 - 31 + 300, 486 - 55, intX2 + 48 + 300, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX7, intY7
+                                If intX7 < 0 And intY7 < 0 Then 
+                                    Delay 2000
+                                    TracePrint intX2 - 31 + 300
+                                    Tap intX2 - 31 + 300, 486
+                                End If
+                            End If
+                        ElseIf ((intX6 - intX3) - (intX4 - intX5) > -10 And (intX6 - intX3) - (intX4 - intX5) < 10) Then
+                            If intX2 - 31 -150 > 220 And intX2 + 48 - 150 < 980 Then
+                                FindPic intX2 - 31 -150, 486 - 55, intX2 + 48 - 150, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX7, intY7
+                                If intX7 < 0 And intY7 < 0 Then 
+                                    Delay 2000
+                                    TracePrint intX2 - 31 -300
+                                    Tap intX2 - 31 - 300, 486
+                                End If
+                            End If
+                            If intX2 - 31 + 150 > 220 And intX2 + 48 + 150 < 980 Then
+                                FindPic intX2 - 31 + 150, 486 - 55, intX2 + 48 + 150, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX7, intY7
+                                If intX7 < 0 And intY7 < 0 Then 
+                                    Delay 2000
+                                    TracePrint intX2 - 31 + 300
+                                    Tap intX2 - 31 + 300, 486
+                                End If
+                            End If
+                        ElseIf ((intX6 - intX3) - (intX4 - intX5) <= -10 Or (intX6 - intX3) - (intX4 - intX5) >= 10) Then
+                            intX7 = intX4
+                            intY7 = intY4
+                            intX4 = intX5
+                            intY4 = intY5
+                            intX5 = intX7
+                            intY5 = intY7
+                        End If
+                    End If
+				
+                    For 2
+                        If ((intY3 + intY4) / 2) - 10 < ((intY5 + intY6 ) / 2 ) + 10 And ((intY3 + intY4) / 2) + 10 > ((intY5 + intY6 ) / 2 )  -  10 Then
+                            intX7 = ( intX3 + intX4 ) / 2
+                            If intX7 > intX2 Then
+                                intX7 = intX7 - intX2
+                                intX7 = intX2 + intX7 + intX7
+                            ElseIf intX7 < intX2 Then
+                                intX7 = intX2 - intX7
+                                intX7 = intX2 - intX7 - intX7
+                            End If
+                            If intX7 > 220 And intX7 < 980 Then	
+                                FindPic intX7 - 31, 486 - 55, intX7 + 48, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX8, intY8
+                                If intX8 < 0 And intY8 < 0 Then 
+                                    Delay 2000
+                                    TracePrint intX7
+                                    Tap intX7, 486
+                                End If
+                            End If
+                        ElseIf (( intY3 + intY5 ) / 2) -  10 < (( intY4 + intY6 ) / 2 ) + 10 And ((intY3 + intY5) / 2) + 10 > ((intY4 + intY6 ) / 2 )  - 10 Then
+                            intX7 = ( intX3 + intX5 ) / 2
+                            If intX7 > intX2 Then 
+                                intX7 = intX7 - intX2
+                                intX7 = intX2 + intX7 + intX7
+                            ElseIf intX7 < intX2 Then
+                                intX7 = intX2 - intX7
+                                intX7 = intX2 - intX7 - intX7
+                            End If
+                            If intX7 > 220 And intX7 < 980 Then
+                                FindPic intX7 - 31, 486 - 55, intX7 + 48, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX8, intY8
+                                If intX8 < 0 And intY8 < 0 Then
+                                    Delay 2000
+                                    TracePrint intX7
+                                    Tap intX7, 486
+                                End If
+                            End If
+                        End If
+                        intX7 = intX3
+                        intY7 = intY3
+                        intX3 = intX6
+                        intY3 = intY6
+                        intX6 = intX7
+                        intY6 = intY7
+                    Next
+                    ReleaseCapture 
+                    FindPic intX8 - 31, 486 - 55, intX8 + 48, 486 + 53, "Attachment:wood4.png", "000000", 1, 0.97, intX7, intY7
+                    TracePrint intX7
+                    Tap intX7,486
+                    Exit For
+                End If
+                intX2 = intX3
+                intY2 = intY3
+            Next
+            Delay 1000
+            TracePrint intX2
+            TracePrint intY2
+            Tap intX2, 486
+            Delay 1000
+            Tap intX1, 486
+            Delay 10000
+            FindPic 472,567,718,693, "Attachment:giftstart.png","000000", 1,0.9, intX, intY
+            If intX > -1 And intY > -1 Then 
+                Delay 50000
+            End If
+        Loop While (intX > -1 And intY > -1)
+        EnableFastCapture(False)
+        TracePrint rotation
+    ElseIf intX < 0 And intY < 0 Then
+        FindPic 538,218,664,504,"Attachment:gift90R.png","000000",1,0.9,intX,intY
+        If intX > -1 And intY > -1 Then 
+        	EndScript
+            For 10
+                FindPic 300,342,455,843,"Attachment:herowarrior90R.png","000000",0,0.8,intX1,intY1
+                If intX1 > -1 And intY1 > -1 Then 
+                    For 5
+                        FindPic 52,221,310,972,"Attachment:herowarrior290R.png","000000",0,0.8,intX2,intY2
+                        If intX2 > -1 And intY2 > -1 Then 
+                            Tap intX2, intY2
+                            Exit For
+                        End If
+                    Next
+                    Exit For
+                End If
+                //collect data...ai??
+            Next
+        End If
+    End If
+    FindPic 445,841,531,934,"Attachment:waveskip90R.png","000000",1,0.9,intX,intY
+    If intX > -1 And intY > -1 Then 
+        KeyPress "Back"
+    End If
+    For 4
+        FindPic 6,1087,99,1271,"Attachment:battle90R.png","000000",0,0.9,intX,intY
+        If intX < 0 And intY < 0 Then 
+            Tap 634,379
+            Delay 250
+            Tap 540,299
+            Delay 250
+            Tap 542,375
+            Delay 250
+            Tap 541,457
+            Delay 11000
+        End If
+    Next
+    For 10
+        Delay 4000
+        FindPic 6,1087,99,1271,"Attachment:battle90R.png","000000",0,0.9,intX,intY
+        If intX > 0 And intY > 0 Then
+            Exit For
+        End If
+    Next
+    Delay 2000
+    FindPic 6,1087,99,1271,"Attachment:battle90R.png","000000",0,0.9,intX,intY
+    If intX < 0 And intY < 0 Then
+        KeyPress "Back"
+        Delay 1000
+        Tap 750, 600
+        Delay 1080000
+    End If
+    FindPic 22,264,185,878,"Attachment:adsget90R.png","000000",2,0.9,intX,intY
+    If intX > -1 And intY > -1 Then
+        Tap intX, intY
+        Delay 40000
+        Do
+            KeyPress "Back"
+            Delay 2000
+            FindPic 6,1087,99,1271,"Attachment:battle90R.png","000000",0,0.9,intX,intY
+            If intX < 0 And intY < 0 Then
+                Tap 267,840
+                Delay 10000
+            End If
+        Loop While intX < 0 And intY < 0
+    End If
+    FindPic 657,220,720,447,"Attachment:gem60max90R.png","000000",0,0.9,intX,intY
+    If intX > -1 And intY > -1 Then 
+        Tap 259,382
+        Delay 2000
+        Tap 342,381
+        Delay 2000
+        Tap 415,863
+        Delay 2000
+        For 10
+            Tap 249,886
+            Delay 1000
+        Next
+        For 2
+            Tap 90,866
+            Delay 1000
+        Next
+        For 3
+            KeyPress "Back"
+            Delay 1000
+        Next
+    End If
+ElseIf rotation = 2 Then
+    TracePrint "180"
+ElseIf rotation = 3 Then
+    TracePrint "270"
+End If
